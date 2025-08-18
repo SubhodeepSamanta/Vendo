@@ -1,7 +1,7 @@
 "use client"
 import PaymentForm from '@/components/PaymentForm';
 import ShippingDetails from '@/components/ShippingDetails';
-import { CartItemsType } from '@/types';
+import { CartItemsType, shippingDetailsInputs } from '@/types';
 import { ArrowRight, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -83,7 +83,7 @@ const page = () => {
   const searchParams= useSearchParams();
   const router= useRouter();
   const activeStep= searchParams.get("step") || "1";
-  const [shippingForm,setShippingForm]= useState(null);
+  const [shippingForm,setShippingForm]= useState<shippingDetailsInputs>();
 
   return (
     <div className='flex flex-col items-center gap-8 justify-center mt-8'>
@@ -124,7 +124,7 @@ const page = () => {
                     </>
                     :
                     activeStep=='2' ?
-                    <ShippingDetails/>
+                    <ShippingDetails setShippingForm={setShippingForm}/>
                     : (activeStep==='3' && shippingForm) ? <PaymentForm/> : <p className='text-red-500'>You need to fill out shipping details first.</p>
                   }
                 </div>
