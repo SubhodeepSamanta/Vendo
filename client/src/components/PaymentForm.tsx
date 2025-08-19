@@ -1,6 +1,7 @@
 import { paymentFormSchema } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ShoppingCart } from 'lucide-react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
@@ -34,9 +35,14 @@ const PaymentForm = () => {
             <input type="text" placeholder='123 Main Street' id='cvv' className='border-b-1 border-gray-600 outline-none p-1' {...register("cvv")} />
             {errors.cvv && (<p className='text-xs text-red-500 '>{errors.cvv.message}</p>)}
         </div>
-        <button type='submit' className='w-full flex justify-center items-center gap-2 mt-8 bg-gray-800 hover:bg-gray-900 text-white rounded-lg py-2 cursor-pointer'>
-                    Continue 
-                    <ArrowRight className='h-4 w-4'/>
+        <div className='flex gap-2 mt-4'>
+                <Image src='/klarna.png' alt='klarna' height={25} width={50} className='rounded-md'/>
+                <Image src='/cards.png' alt='card' height={25} width={50} className='rounded-md'/>
+                <Image src='/stripe.png' alt='stripe' height={25} width={50} className='rounded-md'/>
+              </div>
+        <button type='submit' className='w-full flex justify-center items-center gap-2 mt-4 bg-gray-800 hover:bg-gray-900 text-white rounded-lg py-2 cursor-pointer'>
+                    Proceed to pay 
+                    <ShoppingCart className='h-4 w-4'/>
                   </button>
     </form>
   )

@@ -1,3 +1,4 @@
+import Interactions from '@/components/Interactions';
 import { ProductType } from '@/types';
 import { Plus, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
@@ -35,7 +36,7 @@ const ProductPage = ({params,searchParams}:{params:{id:string},searchParams:{siz
       <p className='text-sm text-gray-700 mb-4'>{product.description}</p>
       <p className='text-xl font-medium mb-4'>${product.price.toFixed(2)}</p>
       <div>
-        Interaction
+        <Interactions product={product} selectedSize={selectedSize} selectedColor={selectedColor} />
       </div>
       <div className='flex flex-col gap-4'>
       <button className='bg-gray-700 border-1 border-gray-700 text-gray-200 hover:bg-gray-900 flex gap-2 items-center justify-center p-2 rounded-md cursor-pointer'><Plus className='h-4 w-4'/> Add to Cart</button>
