@@ -1,6 +1,7 @@
 "use client"
 import PaymentForm from '@/components/PaymentForm';
 import ShippingDetails from '@/components/ShippingDetails';
+import useCartStore from '@/stores/cartStore';
 import { CartItemsType, shippingDetailsInputs } from '@/types';
 import { ArrowRight, Trash2 } from 'lucide-react';
 import Image from 'next/image';
@@ -22,68 +23,14 @@ const steps = [
   },
 ];
 
-// TEMPORARY
-const cartItems: CartItemsType = [
-  {
-    id: 1,
-    name: "Adidas CoreFit T-Shirt",
-    shortDescription:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 39.9,
-    sizes: ["s", "m", "l", "xl", "xxl"],
-    colors: ["gray", "purple", "green"],
-    images: {
-      gray: "/products/1g.png",
-      purple: "/products/1p.png",
-      green: "/products/1gr.png",
-    },
-    quantity: 1,
-    selectedSize: "m",
-    selectedColor: "gray",
-  },
-  {
-    id: 2,
-    name: "Puma Ultra Warm Zip",
-    shortDescription:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 59.9,
-    sizes: ["s", "m", "l", "xl"],
-    colors: ["gray", "green"],
-    images: { gray: "/products/2g.png", green: "/products/2gr.png" },
-    quantity: 1,
-    selectedSize: "l",
-    selectedColor: "gray",
-  },
-  {
-    id: 3,
-    name: "Nike Air Essentials Pullover",
-    shortDescription:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 69.9,
-    sizes: ["s", "m", "l"],
-    colors: ["green", "blue", "black"],
-    images: {
-      green: "/products/3gr.png",
-      blue: "/products/3b.png",
-      black: "/products/3bl.png",
-    },
-    quantity: 1,
-    selectedSize: "l",
-    selectedColor: "black",
-  },
-];
+
 
 const page = () => {
   const searchParams= useSearchParams();
   const router= useRouter();
   const activeStep= searchParams.get("step") || "1";
   const [shippingForm,setShippingForm]= useState<shippingDetailsInputs>();
+  const {cart,removeFromCart}= useCartStore();
 
   return (
     <div className='flex flex-col items-center gap-8 justify-center mt-8'>
@@ -104,8 +51,8 @@ const page = () => {
                     activeStep=='1'? 
                     <>
                     <p className='font-medium '>Cart Items</p>
-                    {cartItems.map((item)=>(
-                      <div className='flex justify-between items-center p-4' key={item.id}>
+                    {cart.map((item)=>(
+                      <div className='flex justify-between items-center p-4' key={item.id+item.selectedSize+item.selectedColor}>
                         <div className='flex items-center'>
                           <div className='relative h-32 w-32 bg-gray-50 rounded-xl object-cover overflow-hidden'>
                             <Image src={item.images[item.selectedColor]} fill alt={`${item.id}`} className='object-contain' />
@@ -118,7 +65,7 @@ const page = () => {
                             <p className='mt-4'>${item.price.toFixed(2)}</p>
                           </div>
                         </div>
-                        <div className='flex items-center justify-center h-8 w-8 rounded-full bg-red-200 text-red-600 cursor-pointer'><Trash2 className='h-4 w-4'/></div>
+                        <div className='flex items-center justify-center h-8 w-8 rounded-full bg-red-200 text-red-600 cursor-pointer' onClick={()=>removeFromCart(item)}><Trash2 className='h-4 w-4'/></div>
                       </div>
                     ))}
                     </>
@@ -133,7 +80,7 @@ const page = () => {
                   <p className='font-medium'>Cart Details</p>
                   <div className='flex font-bold justify-between py-4 px-2'>
                     <p>Subtotal</p>
-                    <p>${cartItems.reduce((acc,item)=>(acc+(item.price*item.quantity)),0).toFixed(2)}</p>
+                    <p>${cart.reduce((acc,item)=>(acc+(item.price*item.quantity)),0).toFixed(2)}</p>
                   </div>
                   <div className='flex text-sm justify-between pb-2 px-2'>
                     <p>Discount</p>
@@ -146,7 +93,7 @@ const page = () => {
                   <hr className='border-gray-400' />
                   <div className='flex text-sm justify-between py-4 px-2'>
                     <p>Total</p>
-                    <p>${cartItems.reduce((acc,item)=>(acc+(item.price*item.quantity)),0).toFixed(2)}</p>
+                    <p>${cart.reduce((acc,item)=>(acc+(item.price*item.quantity)),0).toFixed(2)}</p>
                   </div>
                   {
                     activeStep=='1' &&
