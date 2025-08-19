@@ -128,7 +128,7 @@ const page = () => {
                     : (activeStep==='3' && shippingForm) ? <PaymentForm/> : <p className='text-red-500'>You need to fill out shipping details first.</p>
                   }
                 </div>
-
+                
                 <div className='w-full lg:w-5/12 shadow-xl rounded-xl h-max p-4'>
                   <p className='font-medium'>Cart Details</p>
                   <div className='flex font-bold justify-between py-4 px-2'>

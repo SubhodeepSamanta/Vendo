@@ -41,9 +41,9 @@ const ShippingDetails = ({setShippingForm}:{setShippingForm:(data: shippingDetai
             {errors.city && (<p className='text-xs text-red-500 '>{errors.city.message}</p>)}
         </div>
         <button type='submit' className='w-full flex justify-center items-center gap-2 mt-8 bg-gray-800 hover:bg-gray-900 text-white rounded-lg py-2 cursor-pointer'>
-                    Continue 
-                    <ArrowRight className='h-4 w-4'/>
-                  </button>
+            Continue 
+        <ArrowRight className='h-4 w-4'/>
+        </button>
     </form>
   )
 }
