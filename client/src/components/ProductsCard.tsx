@@ -1,5 +1,6 @@
 "use client"
 
+import useCartStore from '@/stores/cartStore'
 import { ProductType } from '@/types'
 import { ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
@@ -11,9 +12,19 @@ const ProductsCard = ({product}:{product:ProductType}) => {
     size:product.sizes[0],
     color:product.colors[0]
   })
+  const {addToCart}= useCartStore();
 
   const handleProductType=({type,value}:{type:"size"|"color",value:string})=>{
     setProductTypes((prev)=>({...prev,[type]:value}))
+  }
+
+  const handleAddToCart=()=>{
+    addToCart({
+      ...product,
+      quantity:1,
+      selectedSize: productTypes.size,
+      selectedColor: productTypes.color 
+    })
   }
 
   return (
@@ -49,7 +60,7 @@ const ProductsCard = ({product}:{product:ProductType}) => {
         </div>
         <div className='flex items-center justify-between m-4'>
           <p className='text-md font-medium'>${product.price.toFixed(2)}</p>
-          <div className='ring ring-gray-300 flex gap-2 text-sm items-center px-2 py-1 rounded-md shadow-xl cursor-pointer hover:bg-gray-800 hover:text-white transition-all duration-200'>
+          <div className='ring ring-gray-300 flex gap-2 text-sm items-center px-2 py-1 rounded-md shadow-xl cursor-pointer hover:bg-gray-800 hover:text-white transition-all duration-200' onClick={handleAddToCart}>
             <ShoppingCart/>
             Add to Cart
           </div>
