@@ -21,11 +21,17 @@ const product:ProductType={
     },
   }
 
+  export const generateMetadata=async({params}:{params:{id:string}})=>{
+    return{
+      title:product.name,
+      describe:product.description
+    }
+  }
+
 const ProductPage = ({params,searchParams}:{params:{id:string},searchParams:{size:string,color:string}}) => {
   const {size,color}= searchParams;
   const selectedSize= size || product.sizes[0] as string;
   const selectedColor= color || product.colors[0] as string;
-  console.log(selectedColor);
   return (
     <div className='flex flex-col lg:flex-row gap-8 lg:gap-12'>
       <div className='flex w-5/12 shadow-lg aspect-[2/3] relative bg-gray-50'>
@@ -37,10 +43,6 @@ const ProductPage = ({params,searchParams}:{params:{id:string},searchParams:{siz
       <p className='text-xl font-medium mb-4'>${product.price.toFixed(2)}</p>
       <div>
         <Interactions product={product} selectedSize={selectedSize} selectedColor={selectedColor} />
-      </div>
-      <div className='flex flex-col gap-4'>
-      <button className='bg-gray-700 border-1 border-gray-700 text-gray-200 hover:bg-gray-900 flex gap-2 items-center justify-center p-2 rounded-md cursor-pointer'><Plus className='h-4 w-4'/> Add to Cart</button>
-      <button className='hover:bg-gray-50 flex gap-2 items-center justify-center border-1 border-gray-700 p-2 rounded-md cursor-pointer'><ShoppingCart className='h-4 w-4'/>Buy this item</button>
       </div>
       <div className='flex gap-2 py-4'>
         <Image src='/klarna.png' alt='klarna' height={25} width={50} className='rounded-md'/>
