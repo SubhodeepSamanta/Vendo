@@ -182,7 +182,7 @@ const AppSidebar = () => {
                 </SidebarMenuButton>
                 <SidebarMenuSub>
                   <SidebarMenuSubItem>
-                    <SidebarMenuSubButton>
+                    <SidebarMenuSubButton asChild>
                         <Link href="/#" className="flex items-center gap-2">
                         <Plus />
                         Add Project
@@ -190,7 +190,7 @@ const AppSidebar = () => {
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>
                   <SidebarMenuSubItem>
-                    <SidebarMenuSubButton>
+                    <SidebarMenuSubButton asChild>
                         <Link href="/#" className="flex items-center gap-2">
                         <Plus />
                         Add Category
