@@ -1,4 +1,7 @@
+import AppLineCharts from "@/components/AppLineCharts";
 import CardList from "@/components/CardList";
+import EditUser from "@/components/EditUser";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
@@ -8,8 +11,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Button } from "@/components/ui/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { Progress } from "@/components/ui/progress";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { BadgeCheck, Candy, Citrus, Shield } from "lucide-react";
 import React from "react";
 
@@ -37,37 +46,77 @@ const singleUserPage = () => {
             <h1 className="font-medium text-lg">User Badges</h1>
             <div className="flex gap-4 mt-4">
               <HoverCard>
-                <HoverCardTrigger><BadgeCheck height={36} width={36} className="bg-blue-500/30 p-2 rounded-full border-1 border-blue-500/50"/></HoverCardTrigger>
+                <HoverCardTrigger>
+                  <BadgeCheck
+                    height={36}
+                    width={36}
+                    className="bg-blue-500/30 p-2 rounded-full border-1 border-blue-500/50"
+                  />
+                </HoverCardTrigger>
                 <HoverCardContent>
                   <h1 className="font-bold mb-2">Verified User</h1>
-                  <p className="text-sm text-muted-foreground">This user has been verified by the admin</p>
+                  <p className="text-sm text-muted-foreground">
+                    This user has been verified by the admin
+                  </p>
                 </HoverCardContent>
               </HoverCard>
               <HoverCard>
-                <HoverCardTrigger><Shield height={36} width={36} className="bg-green-500/30 p-2 rounded-full border-1 border-green-500/50"/></HoverCardTrigger>
+                <HoverCardTrigger>
+                  <Shield
+                    height={36}
+                    width={36}
+                    className="bg-green-500/30 p-2 rounded-full border-1 border-green-500/50"
+                  />
+                </HoverCardTrigger>
                 <HoverCardContent>
                   <h1 className="font-bold mb-2">Admin</h1>
-                  <p className="text-sm text-muted-foreground">Admin users have access to all features and can manage users</p>
+                  <p className="text-sm text-muted-foreground">
+                    Admin users have access to all features and can manage users
+                  </p>
                 </HoverCardContent>
               </HoverCard>
               <HoverCard>
-                <HoverCardTrigger><Candy height={36} width={36} className="bg-yellow-500/30 p-2 rounded-full border-1 border-yellow-500/50"/></HoverCardTrigger>
+                <HoverCardTrigger>
+                  <Candy
+                    height={36}
+                    width={36}
+                    className="bg-yellow-500/30 p-2 rounded-full border-1 border-yellow-500/50"
+                  />
+                </HoverCardTrigger>
                 <HoverCardContent>
                   <h1 className="font-bold mb-2">Awarded</h1>
-                  <p className="text-sm text-muted-foreground">This user has been awarded for their contributions</p>
+                  <p className="text-sm text-muted-foreground">
+                    This user has been awarded for their contributions
+                  </p>
                 </HoverCardContent>
               </HoverCard>
               <HoverCard>
-                <HoverCardTrigger><Citrus height={36} width={36} className="bg-orange-500/30 p-2 rounded-full border-1 border-orange-500/50"/></HoverCardTrigger>
+                <HoverCardTrigger>
+                  <Citrus
+                    height={36}
+                    width={36}
+                    className="bg-orange-500/30 p-2 rounded-full border-1 border-orange-500/50"
+                  />
+                </HoverCardTrigger>
                 <HoverCardContent>
                   <h1 className="font-bold mb-2">Popular</h1>
-                  <p className="text-sm text-muted-foreground">This user has been popular in the community</p>
+                  <p className="text-sm text-muted-foreground">
+                    This user has been popular in the community
+                  </p>
                 </HoverCardContent>
               </HoverCard>
             </div>
           </div>
           <div className="bg-primary-foreground p-4 rounded-lg">
-            <h1 className="text-lg font-medium mb-4">User Information</h1>
+            <div className="flex justify-between">
+              <h1 className="text-lg font-medium mb-4">User Information</h1>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button>Edit User</Button>
+                </SheetTrigger>
+                <EditUser />
+              </Sheet>
+            </div>
             <p className="text-xs text-muted-foreground mb-2">
               Profile Information
             </p>
@@ -105,8 +154,20 @@ const singleUserPage = () => {
           </div>
         </div>
         <div className="w-full xl:w-2/3 space-y-6">
-          <div className="bg-primary-foreground p-4 rounded-lg">User Card</div>
-          <div className="bg-primary-foreground p-4 rounded-lg">Chart</div>
+          <div className="bg-primary-foreground p-4 rounded-lg flex flex-col gap-2">
+            <div className="flex items-center gap-4">
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <p className="text-xl font-medium">John Doe</p>
+            </div>
+            <p className="text-muted-foreground text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum magni voluptates illo aperiam distinctio architecto autem nemo, ratione ex repellat veritatis quis quod optio quisquam provident quo earum et excepturi. Enim aspernatur mollitia blanditiis accusantium necessitatibus animi ratione id voluptatibus?</p>
+          </div>
+          <div className="bg-primary-foreground p-4 rounded-lg">
+            <h1 className="text-lg font-medium mb-4">User Activity</h1>
+            <AppLineCharts/>
+          </div>
         </div>
       </div>
     </div>

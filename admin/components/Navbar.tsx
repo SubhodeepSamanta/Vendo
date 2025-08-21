@@ -18,7 +18,7 @@ import { SidebarTrigger } from "./ui/sidebar";
 const Navbar = () => {
     const {setTheme}= useTheme(); 
   return (
-    <div className="w-full flex items-center justify-between py-4 px-8">
+    <nav className="w-full flex items-center justify-between py-4 px-8 sticky top-0 right-0 left-0 bg-background z-10">
       <SidebarTrigger/>
       <div className="flex items-center gap-8">
         <Link href="/">Dashboard</Link>
@@ -58,7 +58,7 @@ const Navbar = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </div>
+    </nav>
   );
 };
 
