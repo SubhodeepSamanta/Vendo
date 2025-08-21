@@ -1,5 +1,6 @@
 import React from 'react'
-import { Payment } from './colums';
+import { columns, Payment } from './colums';
+import { DataTable } from './data-table';
 
 const getData = async (): Promise<Payment[]> => {
   return [
@@ -263,7 +264,7 @@ const PaymentsPage = async() => {
   return (
     <div>
         <h1 className='text-lg font-medium mb-4'>All Payments</h1>
-        
+        <DataTable columns={columns} data={data}/>
     </div>
   )
 }
