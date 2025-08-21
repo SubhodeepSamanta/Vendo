@@ -107,9 +107,19 @@ const singleUserPage = () => {
               </HoverCard>
             </div>
           </div>
+          <div className="bg-primary-foreground p-4 rounded-lg flex flex-col gap-2">
+            <div className="flex items-center gap-4">
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <p className="text-xl font-medium">John Doe</p>
+            </div>
+            <p className="text-muted-foreground text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum magni voluptates illo aperiam distinctio architecto autem nemo, ratione ex repellat veritatis quis quod optio quisquam provident quo earum et excepturi. Enim aspernatur mollitia blanditiis accusantium necessitatibus animi ratione id voluptatibus?</p>
+          </div>
           <div className="bg-primary-foreground p-4 rounded-lg">
             <div className="flex justify-between">
-              <h1 className="text-lg font-medium mb-4">User Information</h1>
+              <h1 className="text-lg font-medium mb-4 py-1">User Information</h1>
               <Sheet>
                 <SheetTrigger asChild>
                   <Button>Edit User</Button>
@@ -123,8 +133,8 @@ const singleUserPage = () => {
             <Progress value={66} />
             <div className="flex flex-col gap-4 mt-8">
               <div className="flex gap-2">
-                <p className="font-medium">Username:</p>
-                <p className="text-muted-foreground txt-xs">john.doe</p>
+                <p className="font-medium">Full Name:</p>
+                <p className="text-muted-foreground txt-xs">John Doe</p>
               </div>
               <div className="flex gap-2">
                 <p className="font-medium">Email:</p>
@@ -137,33 +147,20 @@ const singleUserPage = () => {
                 <p className="text-muted-foreground txt-xs">+1 234 5678</p>
               </div>
               <div className="flex gap-2">
-                <p className="font-medium">Location:</p>
-                <p className="text-muted-foreground txt-xs">New York, NY</p>
+                <p className="font-medium">Address:</p>
+                <p className="text-muted-foreground txt-xs">123 Main St</p>
               </div>
               <div className="flex gap-2">
-                <p className="font-medium">Role:</p>
-                <Badge>Admin</Badge>
+                <p className="font-medium">City:</p>
+                <p className="text-muted-foreground txt-xs">New York, NY</p>
               </div>
               <p className="text-muted-foreground text-xs">
                 Joined on 2025.01.01
               </p>
             </div>
           </div>
-          <div className="bg-primary-foreground p-4 rounded-lg">
-            <CardList title="Recent Transactions" />
-          </div>
         </div>
         <div className="w-full xl:w-2/3 space-y-6">
-          <div className="bg-primary-foreground p-4 rounded-lg flex flex-col gap-2">
-            <div className="flex items-center gap-4">
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <p className="text-xl font-medium">John Doe</p>
-            </div>
-            <p className="text-muted-foreground text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum magni voluptates illo aperiam distinctio architecto autem nemo, ratione ex repellat veritatis quis quod optio quisquam provident quo earum et excepturi. Enim aspernatur mollitia blanditiis accusantium necessitatibus animi ratione id voluptatibus?</p>
-          </div>
           <div className="bg-primary-foreground p-4 rounded-lg">
             <h1 className="text-lg font-medium mb-4">User Activity</h1>
             <AppLineCharts/>

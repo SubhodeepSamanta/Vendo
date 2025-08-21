@@ -79,7 +79,7 @@ const AppSidebar = () => {
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Link href="/" className="flex items-center">
-                <Image src="/globe.svg" height={20} width={20} alt="logo" />
+                <Image src="/logo.png" height={20} width={20} alt="logo" />
                 <p>Vendo</p>
               </Link>
             </SidebarMenuButton>

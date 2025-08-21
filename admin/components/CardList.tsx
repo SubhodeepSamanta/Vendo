@@ -3,53 +3,85 @@ import { Card } from './ui/card';
 import Image from 'next/image';
 import { Badge } from './ui/badge';
 
-const popularContent = [
+const popularProducts = [
   {
     id: 1,
-    title: "JavaScript Tutorial",
-    badge: "Coding",
-    image:
-      "https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=800",
-    count: 4300,
+    name: "Adidas CoreFit T-Shirt",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 39.9,
+    sizes: ["s", "m", "l", "xl", "xxl"],
+    colors: ["gray", "purple", "green"],
+    images: {
+      gray: "/products/1g.png",
+      purple: "/products/1p.png",
+      green: "/products/1gr.png",
+    },
   },
   {
     id: 2,
-    title: "Tech Trends 2025",
-    badge: "Tech",
-    image:
-      "https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=800",
-    count: 3200,
+    name: "Puma Ultra Warm Zip",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 59.9,
+    sizes: ["s", "m", "l", "xl"],
+    colors: ["gray", "green"],
+    images: { gray: "/products/2g.png", green: "/products/2gr.png" },
   },
   {
     id: 3,
-    title: "The Future of AI",
-    badge: "AI",
-    image:
-      "https://images.pexels.com/photos/2007647/pexels-photo-2007647.jpeg?auto=compress&cs=tinysrgb&w=800",
-    count: 2400,
+    name: "Nike Air Essentials Pullover",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 69.9,
+    sizes: ["s", "m", "l"],
+    colors: ["green", "blue", "black"],
+    images: {
+      green: "/products/3gr.png",
+      blue: "/products/3b.png",
+      black: "/products/3bl.png",
+    },
   },
   {
     id: 4,
-    title: "React Hooks Explained",
-    badge: "Coding",
-    image:
-      "https://images.pexels.com/photos/943096/pexels-photo-943096.jpeg?auto=compress&cs=tinysrgb&w=800",
-    count: 1500,
+    name: "Nike Dri Flex T-Shirt",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 29.9,
+    sizes: ["s", "m", "l"],
+    colors: ["white", "pink"],
+    images: { white: "/products/4w.png", pink: "/products/4p.png" },
   },
   {
     id: 5,
-    title: "Image Generation with AI",
-    badge: "AI",
-    image:
-      "https://images.pexels.com/photos/3094799/pexels-photo-3094799.jpeg?auto=compress&cs=tinysrgb&w=800",
-    count: 1200,
+    name: "Under Armour StormFleece",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 49.9,
+    sizes: ["s", "m", "l"],
+    colors: ["red", "orange", "black"],
+    images: {
+      red: "/products/5r.png",
+      orange: "/products/5o.png",
+      black: "/products/5bl.png",
+    },
   },
 ];
 
 const latestTransactions = [
   {
     id: 1,
-    title: "Subscription Renewal",
+    title: "Order Payment",
     badge: "John Doe",
     image:
       "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -57,7 +89,7 @@ const latestTransactions = [
   },
   {
     id: 2,
-    title: "Payment for Services",
+    title: "Order Payment",
     badge: "Jane Smith",
     image:
       "https://images.pexels.com/photos/4969918/pexels-photo-4969918.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -65,7 +97,7 @@ const latestTransactions = [
   },
   {
     id: 3,
-    title: "Subscription Renewal",
+    title: "Order Payment",
     badge: "Michael Johnson",
     image:
       "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -73,7 +105,7 @@ const latestTransactions = [
   },
   {
     id: 4,
-    title: "Payment for Services",
+    title: "Order Payment",
     badge: "Lily Adams",
     image:
       "https://images.pexels.com/photos/712513/pexels-photo-712513.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -81,7 +113,7 @@ const latestTransactions = [
   },
   {
     id: 5,
-    title: "Subscription Renewal",
+    title: "Order Payment",
     badge: "Sam Brown",
     image:
       "https://images.pexels.com/photos/1680175/pexels-photo-1680175.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -90,13 +122,13 @@ const latestTransactions = [
 ];
 
 const CardList = ({title}:{title:string}) => {
-    const list = title==='Popular Content'? popularContent : latestTransactions;
   return (
     <div>
         <h1 className='text-lg font-medium'>{title}</h1>
         <div className='flex flex-col gap-4 p-4'>
         {
-            list.map((item)=>(
+          title=='Latest Transactions' ?
+            latestTransactions.map((item)=>(
                 <Card key={item.id} className='flex flex-row p-4 gap-4'>
                     <div className='h-12 w-12 rounded relative overflow-hidden'>
                         <Image src={item.image} alt='item' fill className='object-cover'/>
@@ -106,7 +138,21 @@ const CardList = ({title}:{title:string}) => {
                         <Badge variant="secondary" className='text-xs'>{item.badge}</Badge>
                     </div>
                     <div className='flex items-center justify-center'>
-                        {`${item.count/1000}K`}
+                        {`$${item.count/1000}K`}
+                    </div>
+                </Card>
+            ))
+            :
+            popularProducts.map((item)=>(
+                <Card key={item.id} className='flex flex-row p-4 gap-4'>
+                    <div className='h-12 w-12 rounded relative overflow-hidden'>
+                        <Image src={Object.values(item.images)[0] || ""} alt='item' fill className='object-cover'/>
+                    </div>
+                    <div className='flex flex-col justify-center flex-1 gap-1 text-sm'>
+                        {item.name}
+                    </div>
+                    <div className='flex items-center justify-center'>
+                        {`$ ${item.price}`}
                     </div>
                 </Card>
             ))

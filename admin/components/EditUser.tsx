@@ -29,7 +29,7 @@ import {
 } from "./ui/select";
 
 const formSchema = z.object({
-  username: z
+  fullname: z
     .string()
     .min(2, { message: "Username is required" })
     .max(50, { message: "Username is required" }),
@@ -38,19 +38,19 @@ const formSchema = z.object({
     .string()
     .min(10, { message: "Phone is required" })
     .max(15, { message: "Phone is required" }),
-  location: z.string().min(2, { message: "Locations is required" }),
-  role: z.enum(["admin", "user"]),
+  address: z.string().min(2, { message: "Locations is required" }),
+  city: z.string().min(2, { message: "City is required" }),
 });
 
 const EditUser = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "john.doe",
+      fullname: "John Doe",
       email: "john.doe@gmail.com",
       phone: "+1 234 5678",
-      location: "New York, NY",
-      role: "admin",
+      address: "123 Main St",
+      city: "New York, NY",
     },
   });
   return (
@@ -62,15 +62,15 @@ const EditUser = () => {
             <form className="space-y-8">
               <FormField
                 control={form.control}
-                name="username"
+                name="fullname"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Full Name</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      This is your public display name.
+                      This is your public display full name.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -102,7 +102,7 @@ const EditUser = () => {
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      Only admin can see your phone number
+                      Only admin can see your phone number (optional)
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -110,15 +110,15 @@ const EditUser = () => {
               />
               <FormField
                 control={form.control}
-                name="location"
+                name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Location</FormLabel>
+                    <FormLabel>Address</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      This is your public location.
+                      This is your public address.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -126,23 +126,15 @@ const EditUser = () => {
               />
               <FormField
                 control={form.control}
-                name="role"
+                name="city"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Role</FormLabel>
+                    <FormLabel>City</FormLabel>
                     <FormControl>
-                      <Select>
-                        <SelectTrigger className="w-[180px]">
-                          <SelectValue placeholder="User" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="admin">Admin</SelectItem>
-                          <SelectItem value="user">User</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                        Only verified users can be admin
+                      This is your public city location.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
