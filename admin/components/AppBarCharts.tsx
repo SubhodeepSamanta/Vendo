@@ -30,7 +30,7 @@ const chartData = [
   { month: "May", total: 209, successful: 130 },
   { month: "June", total: 214, successful: 140 },
 ]
-
+ 
 const chartConfig = {
   total: {
     label: "Total",
