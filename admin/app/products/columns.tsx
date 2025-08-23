@@ -6,84 +6,84 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { cn } from "@/lib/utils"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 
-export type Payment = {
-  id: string
-  username: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+export type Product = {
+  id: string |number,
+  price: number 
+  name: string,
+  shortDescription: string
+  description: string
+  sizes: string[],
+  colors: string[],
+  images: Record<string,string>,
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Product>[] = [
   {
-    accessorKey: "username",
+    id: "select",
     header: ({ table }) => (
-      <div className="flex items-center text-base gap-4">
       <Checkbox
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         checked={
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-        />
-      <p>User</p>
-        </div>
+      />
     ),
-    cell:({ row }) => (
-      <div className="flex items-center gap-4">
+    cell: ({ row }) => (
       <Checkbox
-        checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-        />
-      <p>{row.getValue("username")}</p>
-        </div>
+        checked={row.getIsSelected()}
+      />
     ),
   },
   {
-    accessorKey: "email",
+    accessorKey: "images",
+    header: "Image",
+    cell: ({ row }) => {
+      const product = row.original;
+      return (
+        <div className="w-9 h-9 relative">
+          <Image
+            src={product.images[product.colors[0]]}
+            alt={product.name}
+            fill
+            className="rounded-full object-cover"
+          />
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "name",
+    header: "name",
+  },
+  {
+    accessorKey: "price",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Price
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
     cell:({row})=>{
-        const status= row.getValue("status");
-        return(
-            <div className={cn(`flex items-center py-1 px-2 rounded-md w-max text-xs`,status=='pending' && 'bg-yellow-500/40',status=='success' && 'bg-green-500/40',status=='failed' && 'bg-red-500/40')}>{status as String}</div>
-        )
+      const product=row.original;
+      return(
+        `$${product.price.toFixed(2)}`
+      )
     }
   },
   {
-    accessorKey: "amount",
-    header: ()=> <div className="text-right">{"Amount"}</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
-    },
-  },
-  
-  {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
+      const product = row.original
       return (
         <div className="w-full flex items-center justify-end">
         <DropdownMenu>
@@ -96,13 +96,12 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(product.id.toString())}
               >
-              Copy payment ID
+              Copy user ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem asChild><Link href={`/products/${product.id}`}>View Product</Link></DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
                 </div>

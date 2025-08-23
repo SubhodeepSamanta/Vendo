@@ -57,7 +57,7 @@ export function DataTable<TData, TValue>({
           <div>
             <Button variant="destructive">
               <Trash className="h-4 w-4"/>
-              Delete Payment(s)
+              Delete User(s)
             </Button>
           </div>
           }
