@@ -49,6 +49,7 @@ import { Sheet, SheetTrigger } from "./ui/sheet";
 import AddOrder from "./AddOrder";
 import AddCategory from "./AddCategory";
 import AddUser from "./AddUser";
+import AddProduct from "./AddProduct";
 
 const items = [
   {
@@ -138,7 +139,7 @@ const AppSidebar = () => {
                   </Link>
                 </SidebarMenuButton>
               </SheetTrigger>
-              <EditUser />
+              <AddProduct />
             </Sheet>
           </SidebarMenuButton>
           <SidebarMenuButton asChild>
