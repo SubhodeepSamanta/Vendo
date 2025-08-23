@@ -27,6 +27,8 @@ import {
   Projector,
   Search,
   Settings,
+  Shirt,
+  ShoppingCart,
   User,
 } from "lucide-react";
 import Image from "next/image";
@@ -42,6 +44,11 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible";
+import EditUser from "./EditUser";
+import { Sheet, SheetTrigger } from "./ui/sheet";
+import AddOrder from "./AddOrder";
+import AddCategory from "./AddCategory";
+import AddUser from "./AddUser";
 
 const items = [
   {
@@ -110,97 +117,95 @@ const AppSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup className="flex flex-col gap-2">
-          <SidebarGroupLabel>Projects</SidebarGroupLabel>
-          <SidebarGroupAction>
-            <Plus /> <span className="sr-only">Add Project</span>
-          </SidebarGroupAction>
+          <SidebarGroupLabel>Products</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton>
-                <Link href="/#" className="flex items-center gap-2">
-                  <Projector />
-                  See all Projects
+                <Link href="/products" className="flex items-center gap-4">
+                  <Shirt  />
+                  See all Products
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <Link href="/#" className="flex items-center gap-2">
-                  <Plus />
-                  Add Project
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
-        <Collapsible defaultOpen className="group/collapsible">
-          <SidebarGroup>
-            <SidebarGroupLabel asChild>
-              <CollapsibleTrigger>
-                Collapsable Group
-                <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-              </CollapsibleTrigger>
-            </SidebarGroupLabel>
-            <CollapsibleContent>
-              <SidebarGroupContent className="flex flex-col gap-2">
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton>
-                      <Link href="/#" className="flex items-center gap-2">
-                        <Projector />
-                        See all Projects
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton>
-                      <Link href="/#" className="flex items-center gap-2">
-                        <Plus />
-                        Add Project
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </CollapsibleContent>
-          </SidebarGroup>
-        </Collapsible>
-        <SidebarGroup>
-          <SidebarGroupLabel>Nested Items</SidebarGroupLabel>
-          <SidebarGroupContent className="flex flex-col gap-2">
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton>
-                  <Link href="/#" className="flex items-center gap-2">
-                    <Projector />
-                    See all Projects
+          <SidebarMenuButton asChild>
+            <Sheet>
+              <SheetTrigger asChild>
+                <SidebarMenuButton asChild>
+                  <Link href="#">
+                    <Plus />
+                    Add Product
                   </Link>
                 </SidebarMenuButton>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem>
-                    <SidebarMenuSubButton asChild>
-                        <Link href="/#" className="flex items-center gap-2">
-                        <Plus />
-                        Add Project
-                      </Link>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                  <SidebarMenuSubItem>
-                    <SidebarMenuSubButton asChild>
-                        <Link href="/#" className="flex items-center gap-2">
-                        <Plus />
-                        Add Category
-                      </Link>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
+              </SheetTrigger>
+              <EditUser />
+            </Sheet>
+          </SidebarMenuButton>
+          <SidebarMenuButton asChild>
+            <Sheet>
+              <SheetTrigger asChild>
+                <SidebarMenuButton asChild>
+                  <Link href="#">
+                    <Plus />
+                    Add Category
+                  </Link>
+                </SidebarMenuButton>
+              </SheetTrigger>
+              <AddCategory />
+            </Sheet>
+          </SidebarMenuButton>
+        </SidebarGroup>
+        <SidebarGroup className="flex flex-col gap-2">
+          <SidebarGroupLabel>Users</SidebarGroupLabel>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <Link href="/users" className="flex items-center gap-4">
+                  <User className="h-5 w-5" />
+                  See all Users
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+          <SidebarMenuButton asChild>
+            <Sheet>
+              <SheetTrigger asChild>
+                <SidebarMenuButton asChild>
+                  <Link href="#">
+                    <Plus />
+                    Add User
+                  </Link>
+                </SidebarMenuButton>
+              </SheetTrigger>
+              <AddUser />
+            </Sheet>
+          </SidebarMenuButton>
+        </SidebarGroup>
+        <SidebarGroup className="flex flex-col gap-2">
+          <SidebarGroupLabel>Orders/Payments</SidebarGroupLabel>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <Link href="/payments" className="flex items-center gap-4">
+                  <ShoppingCart className="h-5 w-5" />
+                  See all Transactions
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+          <SidebarMenuButton asChild>
+            <Sheet>
+              <SheetTrigger asChild>
+                <SidebarMenuButton asChild>
+                  <Link href="#">
+                    <Plus />
+                    Add Order
+                  </Link>
+                </SidebarMenuButton>
+              </SheetTrigger>
+              <AddOrder />
+            </Sheet>
+          </SidebarMenuButton>
         </SidebarGroup>
       </SidebarContent>
 
