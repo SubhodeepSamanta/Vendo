@@ -162,7 +162,7 @@ const AppSidebar = () => {
             <SidebarMenuItem>
               <SidebarMenuButton>
                 <Link href="/users" className="flex items-center gap-4">
-                  <User className="h-5 w-5" />
+                  <User />
                   See all Users
                 </Link>
               </SidebarMenuButton>
