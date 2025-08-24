@@ -310,7 +310,7 @@ const AddProduct = () => {
                       <FormMessage />
                     </FormItem>
                   )}
-                />
+                /> 
                 <Button type="submit">Submit</Button>
               </form>
             </Form>
